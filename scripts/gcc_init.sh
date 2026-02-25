@@ -41,11 +41,12 @@ dependencies: []
 EOF
 
 # Create initial commit.md
-cat > "$GCC_DIR/commit.md" << 'EOF'
+INIT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+cat > "$GCC_DIR/commit.md" << EOF
 # Commit History
 
 ## [INIT] Project initialized
-- **Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+- **Date**: $INIT_DATE
 - **Branch**: main
 - **Summary**: GCC memory system initialized.
 EOF
