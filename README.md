@@ -1,5 +1,9 @@
 # Git Context Controller (GCC)
 
+[![Release](https://img.shields.io/github/v/release/faugustdev/git-context-controller)](https://github.com/faugustdev/git-context-controller/releases/tag/v1.0.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skills.sh](https://img.shields.io/badge/skills.sh-compatible-blue)](https://skills.sh)
+
 **Structured context management framework for LLM agents.**
 
 GCC implements Git-like operations (COMMIT, BRANCH, MERGE, CONTEXT) to manage long-horizon agent memory as a persistent, versioned file system.
@@ -98,18 +102,16 @@ Agents operate through **Observation-Thought-Action** cycles, logged in real tim
 
 ```bash
 # Via skills.sh
-npx skills add <owner>/git-context-controller
+npx skills add faugustdev/git-context-controller
 
 # Manual installation
-# Copy the skill to your project's .claude/skills/ directory
 cp -r gcc/ your-project/.claude/skills/gcc/
 ```
 
 ### Standalone
 
 ```bash
-# Clone the repository
-git clone https://github.com/<owner>/git-context-controller.git
+git clone https://github.com/faugustdev/git-context-controller.git
 
 # Initialize GCC in your project
 ./scripts/gcc_init.sh /path/to/your/project/.GCC
@@ -219,6 +221,7 @@ git-context-controller/
 ├── README.md             # This file
 ├── LICENSE               # MIT License
 ├── CONTRIBUTING.md       # Contribution guidelines
+├── .gitignore            # Excludes .GCC/ and local files
 ├── scripts/
 │   └── gcc_init.sh       # Initialization script
 ├── references/
